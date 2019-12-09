@@ -21,7 +21,7 @@ public class SaveToFile {
 	  
 	
 		@SuppressWarnings("unchecked")
-		public static boolean writeToJSONFile(ArrayList<Film> movies, String fname) {
+		public static boolean writeJSONFile(ArrayList<Film> movies, String fname) {
 	        try {
 	            PrintWriter pw = new PrintWriter(new BufferedWriter(
 	                    new FileWriter(fname)));

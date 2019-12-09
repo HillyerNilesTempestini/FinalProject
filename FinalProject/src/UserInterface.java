@@ -23,7 +23,8 @@ import java.nio.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.net.*;
-
+// URL TO TEST BELOW
+//https://en.wikipedia.org/wiki/Robert_Downey_Jr._filmography
 public class UserInterface extends JFrame {
 	
 	ArrayList<Film> movies = new ArrayList<Film>();
@@ -120,59 +121,20 @@ public class UserInterface extends JFrame {
 		c.add(panSouth, BorderLayout.SOUTH);
 		btnText.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				//JOptionPane.showMessageDialog(null, "Saved");
+				
 				
 				if(e.getSource() == btnText)
 				{
-	
-					 class Second extends JFrame implements ActionListener{
-						private JLabel enterName;
-						private JTextField name;
-						private JButton click;
-						private String storeName = "";
-	
-						public Second()
-						{
-							setLayout(null);
-							setSize(300,300);
-							
-							setDefaultCloseOperation(EXIT_ON_CLOSE);
-							enterName = new JLabel("Enter the file name: ");
-							click = new JButton("OK");
-							name = new JTextField();
-							enterName.setBounds(60, 30, 120, 30);
-							name.setBounds(80, 60, 130, 30);
-							click.setBounds(100, 200, 60, 30);
-							click.addActionListener(this);
-							add(click);
-							add(name);
-							add(enterName);
-							
-						}
-							
-						public void actionPerformed(ActionEvent e){
-							if(e.getSource() == click){
-								storeName = name.getText();
-								String extension = storeName.substring(storeName.lastIndexOf(".")).toLowerCase();
-								if (extension.equals(".txt"))
-								{
-									SaveToFile.writeTextFile(movies, storeName);
-									System.out.println("Text File Written.");
-								}
-								else
-									System.out.println("Invalid File Extention!");
-								JOptionPane.showMessageDialog(null, "File name is: " + storeName);
-								System.exit(0);
-							}
-						}
-					}
-					Second sec = new Second();
-					sec.setVisible(true);
 					
+						//String fname = "films.txt";
+						SaveToFile.writeTextFile(movies, "movies.txt");
+						JOptionPane.showMessageDialog(null, "Text File Written.");
+				}
+
 					
 					/*
 					Scanner sc = new Scanner(System.in);
-					System.out.print("\nEnter the name ofthe file: ");
+					System.out.print("\nEnter the name of the file: ");
 					String fname = sc.nextLine();
 					String extension = fname.substring(fname.lastIndexOf(".")).toLowerCase();
 					if (extension.equals(".txt"))
@@ -185,7 +147,7 @@ public class UserInterface extends JFrame {
 						*/
 					
 				}
-			}
+			
 		});
 		
 		JButton btnJson = new JButton("Save to json");
@@ -195,10 +157,14 @@ public class UserInterface extends JFrame {
 		c.add(panSouth, BorderLayout.SOUTH);
 		btnJson.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Saved");
+				
 				
 				if (e.getSource() == btnJson)
 				{
+					SaveToFile.writeJSONFile(movies, "movies.json");
+					JOptionPane.showMessageDialog(null, "Json File Written.");
+					
+					/*
 					Scanner sc = new Scanner(System.in);
 					System.out.print("\nEnter the name ofthe file: ");
 					String fname = sc.nextLine();
@@ -210,6 +176,7 @@ public class UserInterface extends JFrame {
 					}
 					else
 						System.out.println("Invalid File Extention!");
+					*/
 				}
 				
 			}
@@ -220,10 +187,8 @@ public class UserInterface extends JFrame {
 
 	}
 	
-	public void actionPerformed(ActionEvent e) {
-		
-		System.out.println("You pressed the button.");
-		
+	public void actionPerformed(ActionEvent e) {		
+		//System.out.println("You pressed the button.");
 		
 	}
 
@@ -235,9 +200,7 @@ public class UserInterface extends JFrame {
 		
 		//ArrayList<Film> movies = FilmParser.parseFilms();
 		//FilmParser.printFilms(movies);
-		
-		
-		
+
 	
 	}
 }
