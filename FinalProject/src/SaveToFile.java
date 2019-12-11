@@ -3,7 +3,11 @@ import java.util.*;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
+/**
+ * 
+ * @author Sam Tempestini
+ *
+ */
 public class SaveToFile {
 	  public static boolean writeTextFile(ArrayList<Film> movies, String filename) {
 	        try {

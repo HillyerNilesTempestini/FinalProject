@@ -39,9 +39,11 @@ import java.net.*;
  * @author Chris Hillyer
  * @author Sam Tempestini
  * @author Chelsea Niles 
+ *  
  *
  */
 
+@SuppressWarnings("serial")
 public class UserInterface extends JFrame {
 	
 	ArrayList<Film> movies = new ArrayList<Film>();
@@ -69,45 +71,31 @@ public class UserInterface extends JFrame {
 	mnuHelp.add(miAbout);
 	setJMenuBar(mbar);
 	
-	miExit.addActionListener(new ActionListener() {
+	JButton btnExit = new JButton("Exit");
+	miExit.add(btnExit);
+	btnExit.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
+        	if(e.getSource() == btnExit)
+        		System.exit(0);
+        }
+    });
+	
+	JButton btnAuthors = new JButton("Authors");
+	miAbout.add(btnAuthors);
+	btnAuthors.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+        	String str = "Authors:\nChris Hillyer\nChelsea Niles\nSam Tempestini";
+        	if(e.getSource() == btnAuthors)
+        	{
+        		JOptionPane.showMessageDialog(null, str);
+        	}
         	
-        
         }
     });
 	
 	
 	}
-	
-	 
-
-	
-	/*
-	class Exit extends JMenuItem implements MouseListener, MouseMotionListener {
-		public void mouseMoved(MouseEvent e) { }
-		public void mouseDragged(MouseEvent e) {}
-		public void mouseEntered(MouseEvent e) {}
-			
-		public void mouseExited(MouseEvent e) {}
-	
-		public void mousePressed(MouseEvent e) {}	
-		public void mouseReleased(MouseEvent e) {}
-		public void mouseClicked(MouseEvent e) {
-			  dispose();
-	          System.exit (0);
-		}
 		
-		public Exit() {
-	
-			addMouseListener(this);
-			addMouseMotionListener(this);
-			
-		}
-	}
-	*/
-	
-	
-	
 	public UserInterface() {
 		
 		setTitle("Web Scraper");
@@ -118,15 +106,13 @@ public class UserInterface extends JFrame {
 		JPanel panSouth = new JPanel();
 		panSouth.setLayout(new FlowLayout());
 		
-		
-		
 		JPanel panNorth = new JPanel();
 		panNorth.setLayout(new FlowLayout());
 		JLabel webLabel = new JLabel("Enter URL: ");
 		panNorth.add(webLabel);
 		c.add(panNorth, BorderLayout.NORTH);
 		
-	    JTextField urlTextField = new JTextField("https://en.wikipedia.org/wiki/Robert_Downey_Jr._filmography", 45);
+	    JTextField urlTextField = new JTextField("", 45);
 	    urlTextField.setFont(new Font(Font.DIALOG_INPUT, Font.PLAIN, 12));
 	    urlTextField.setForeground(Color.BLACK);
 	    urlTextField.setHorizontalAlignment(JTextField.LEFT);  // Text alignment
@@ -140,7 +126,7 @@ public class UserInterface extends JFrame {
 			
 	    //Font f = new Font("Arial",Font.BOLD,12);
 		//text.setFont(f);
-	    text.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 8));
+	    text.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 10));
 		text.setEditable(false);
 		text.setLineWrap(true);
 		text.setWrapStyleWord(true);
@@ -168,43 +154,10 @@ public class UserInterface extends JFrame {
 					
 					text.setText(mstr);
 					text.setCaretPosition(0);
-					//text.append();
-					
-					
 				}
 			}
 		});
 		
-		
-		
-		
-		
-		
-		/*
-		JPanel panEast = new JPanel();
-		panEast.setLayout(new FlowLayout());
-		JScrollBar dataScrollBar = new JScrollBar();
-		add(dataScrollBar, BorderLayout.EAST);
-		class dataPanel extends JPanel implements MouseListener, MouseMotionListener {
-			public void mouseMoved(MouseEvent e) { }
-			public void mouseDragged(MouseEvent e) {
-				
-			}
-			public void mouseEntered(MouseEvent e) {}
-				
-			public void mouseExited(MouseEvent e) {}
-		
-			public void mousePressed(MouseEvent e) {}	
-			public void mouseReleased(MouseEvent e) {}
-			public void mouseClicked(MouseEvent e) {}
-			
-			public dataPanel() {
-				setDefaultCloseOperation(dataScrollBar.DISPOSE_ON_CLOSE);
-				addMouseListener(this);
-				addMouseMotionListener(this);
-			}
-		}
-		*/
 		JButton btnText = new JButton("Save to text");
 		ButtonHandler handler = new ButtonHandler();
 		btnText.addActionListener(handler);  // the frame itself listens
@@ -212,11 +165,8 @@ public class UserInterface extends JFrame {
 		c.add(panSouth, BorderLayout.SOUTH);
 		btnText.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				if(e.getSource() == btnText)
 				{
-					
 						//String fname = "films.txt";
 						SaveToFile.writeTextFile(movies, "movies.txt");
 						JOptionPane.showMessageDialog(null, "Text File Written.");
@@ -274,8 +224,6 @@ public class UserInterface extends JFrame {
 		});
 
 		setupMenu();
-
-
 	}
 	
 	public void actionPerformed(ActionEvent e) {		
@@ -283,15 +231,8 @@ public class UserInterface extends JFrame {
 		
 	}
 
-
-
 	public static void main(String[] args) {
 		UserInterface frm = new UserInterface();
-		frm.setVisible(true);
-		
-		//ArrayList<Film> movies = FilmParser.parseFilms();
-		//FilmParser.printFilms(movies);
-
-	
+		frm.setVisible(true);			
 	}
 }
