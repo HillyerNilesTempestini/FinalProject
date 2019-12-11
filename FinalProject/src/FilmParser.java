@@ -30,7 +30,7 @@ public class FilmParser {
 			doc = Jsoup.connect(urlName).get();
 		
 		   String title = doc.title();
-		   System.out.println("Title: " + title);
+		   //System.out.println("Title: " + title);
 		   
 		   for (Element table : doc.select("table")) {
 		        for (Element row : table.select("tr")) {
@@ -62,8 +62,8 @@ public class FilmParser {
 		String filmList = "";
 		   for (Film m: movies)
 		   {
-			   filmList = filmList + filmList.format("%s|%s|%s|%s|%s",m.getYear(),m.getTitle(),m.getRole(),m.getNotes(),m.getRef()).trim() + "\n";
-					   
+			   //filmList = filmList + filmList.format("%s|%s|%s|%s|%s",m.getYear(),m.getTitle(),m.getRole(),m.getNotes(),m.getRef()).trim() + "\n";
+			   filmList = filmList + m.toString() + "\n";	   
 
 		   }
 		return filmList;
