@@ -3,6 +3,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
+import java.net.URL;
+
 import org.jsoup.*;
 import java.util.*;
 
@@ -28,7 +30,7 @@ public class FilmParser {
 			doc = Jsoup.connect(urlName).get();
 		
 		   String title = doc.title();
-		   System.out.println("Title: " + title);
+		   //System.out.println("Title: " + title);
 		   
 		   for (Element table : doc.select("table")) {
 		        for (Element row : table.select("tr")) {
@@ -56,14 +58,23 @@ public class FilmParser {
 		}
 		return movies;
 	}
-	public static String printFilms(ArrayList<Film> movies) {
+	public static String returnFilms(ArrayList<Film> movies) {
 		String filmList = "";
 		   for (Film m: movies)
 		   {
-			   filmList = filmList + m.toString() + "\n"; 
+			   //filmList = filmList + filmList.format("%s|%s|%s|%s|%s",m.getYear(),m.getTitle(),m.getRole(),m.getNotes(),m.getRef()).trim() + "\n";
+			   filmList = filmList + m.toString() + "\n";	   
+
 		   }
 		return filmList;
 		
+	}
+	public static void printFilms(ArrayList<Film> movies) {
+		   for (Film m: movies)
+		   {
+			  System.out.println(m);
+		   }
+
 	}
 	
 }

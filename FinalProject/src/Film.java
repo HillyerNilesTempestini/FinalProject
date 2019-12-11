@@ -1,4 +1,8 @@
-
+/**
+ * 
+ * @author Sam Tempestini
+ *
+ */
 public class Film {
 	private String year;
 	private String title;
